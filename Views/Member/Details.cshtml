@@ -1,0 +1,19 @@
+﻿@model RiyaBhandari_Lab2.Models.Member
+
+<section class="bg-white p-4 rounded shadow-sm">
+    <h2>@Model.FullName</h2>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Phone:</strong> @Model.Phone</p>
+    <p><strong>Plan:</strong> @(Model.MembershipPlan?.Name ?? "—")</p>
+
+    <h5 class="mt-4">Bookings</h5>
+    <ul>
+        @foreach (var b in Model.Bookings)
+        {
+            <li>
+                @b.Date.ToString("yyyy-MM-dd") @b.TimeSlot –
+                @b.Venue?.Name ($@b.TotalPrice)
+            </li>
+        }
+    </ul>
+</section>

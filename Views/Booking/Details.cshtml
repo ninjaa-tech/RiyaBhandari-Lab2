@@ -1,0 +1,33 @@
+﻿@model RiyaBhandari_Lab2.Models.Booking
+
+<section class="bg-white p-4 rounded shadow-sm">
+    <h2>Booking #@Model.BookingId</h2>
+
+    <p><strong>Date:</strong> @Model.Date.ToString("yyyy-MM-dd")</p>
+    <p><strong>Time Slot:</strong> @Model.TimeSlot</p>
+    <p><strong>Venue:</strong> @Model.Venue?.Name</p>
+    <p><strong>Member:</strong> @Model.Member?.FullName</p>
+    <p><strong>Total Price:</strong> $@Model.TotalPrice</p>
+
+    <h5 class="mt-3">Add-ons</h5>
+    <ul>
+        @if (Model.AddOns == null || !Model.AddOns.Any())
+        {
+            <li>None</li>
+        }
+        else
+        {
+            foreach (var link in Model.AddOns)
+            {
+                var addon = RiyaBhandari_Lab2.Data.InMemoryData.AddOns
+                .FirstOrDefault(a => a.AddOnId == link.AddOnId);
+                if (addon != null)
+                {
+                    <li>@addon.Name ($@addon.Cost)</li>
+                }
+            }
+        }
+    </ul>
+
+    <a asp-action="Index" class="btn btn-link mt-3">Back to list</a>
+</section>

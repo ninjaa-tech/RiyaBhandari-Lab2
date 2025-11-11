@@ -1,0 +1,14 @@
+﻿@model RiyaBhandari_Lab2.Models.Venue
+<section class="bg-white p-4 rounded shadow-sm">
+    <h2>@Model.Name</h2>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Capacity:</strong> @Model.Capacity</p>
+    <p><strong>Contact:</strong> @Model.ContactEmail</p>
+    <h5 class="mt-4">Membership Plans</h5>
+    <ul>
+        @foreach (var p in Model.MembershipPlans)
+        {
+            <li>@p.Name – $@p.Price (@p.Perks)</li>
+        }
+    </ul>
+</section>

@@ -1,0 +1,75 @@
+﻿@model BookingFormVM
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<section class="bg-white p-4 rounded shadow-sm">
+    <h2>Edit Booking</h2>
+
+    <form asp-action="Edit" method="post" class="mt-3">
+        <input asp-for="Booking.BookingId" type="hidden" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="Booking.Date" class="form-label"></label>
+                <input asp-for="Booking.Date" type="date" class="form-control" />
+                <span asp-validation-for="Booking.Date" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Booking.TimeSlot" class="form-label"></label>
+                <input asp-for="Booking.TimeSlot" class="form-control" />
+                <span asp-validation-for="Booking.TimeSlot" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Booking.TotalPrice" class="form-label"></label>
+                <input asp-for="Booking.TotalPrice" class="form-control" />
+                <span asp-validation-for="Booking.TotalPrice" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-1">
+            <div class="col-md-6">
+                <label class="form-label">Venue</label>
+                <select asp-for="Booking.VenueId" asp-items="Model.VenueOptions" class="form-select"></select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Member (optional)</label>
+                <select asp-for="Booking.MemberId" asp-items="Model.MemberOptions" class="form-select">
+                    <option value="">-- None --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Add-ons</label>
+            <div class="d-flex flex-wrap gap-3">
+                @foreach (var opt in Model.AddOnOptions)
+                {
+                    var isChecked = Model.SelectedAddOnIds.Contains(int.Parse(opt.Value!));
+                    <div class="form-check">
+                        <input class="form-check-input"
+                           type="checkbox"
+                           name="SelectedAddOnIds"
+                           value="@opt.Value"
+                           id="addon_@opt.Value"
+                           @(isChecked ? "checked" : null) />
+                        <label class="form-check-label" for="addon_@opt.Value">@opt.Text</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="Index" class="btn btn-link">Back to list</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+ }

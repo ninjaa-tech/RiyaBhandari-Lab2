@@ -1,0 +1,48 @@
+﻿@model IEnumerable<RiyaBhandari_Lab2.Models.Member>
+
+<section class="bg-white p-4 rounded shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Members</h2>
+        <a asp-action="Create" class="btn btn-success">+ Add New Member</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <p class="text-muted">No members found.</p>
+    }
+    else
+    {
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Plan</th>
+                    <th class="text-end" style="width: 280px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    var plan = m.MembershipPlanId.HasValue
+                    ? RiyaBhandari_Lab2.Data.InMemoryData.FindPlan(m.MembershipPlanId.Value)?.Name
+                    : "—";
+
+                    <tr>
+                        <td>@m.FullName</td>
+                        <td>@m.Email</td>
+                        <td>@plan</td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@m.MemberId"
+                       class="btn btn-sm btn-outline-primary me-1">Details</a>
+                            <a asp-action="Edit" asp-route-id="@m.MemberId"
+                       class="btn btn-sm btn-primary me-1">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@m.MemberId"
+                       class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</section>

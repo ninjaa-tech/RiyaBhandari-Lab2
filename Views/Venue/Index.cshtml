@@ -1,0 +1,20 @@
+﻿@model IEnumerable<RiyaBhandari_Lab2.Models.Venue>
+<section class="bg-white p-4 rounded shadow-sm">
+    <h2>Venues</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr><th>Name</th><th>Location</th><th>Capacity</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var v in Model)
+            {
+                <tr>
+                    <td>@v.Name</td>
+                    <td>@v.Location</td>
+                    <td>@v.Capacity</td>
+                    <td><a asp-action="Details" asp-route-id="@v.VenueId" class="btn btn-sm btn-outline-primary">Details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

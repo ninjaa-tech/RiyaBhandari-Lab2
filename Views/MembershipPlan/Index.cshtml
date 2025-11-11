@@ -1,0 +1,22 @@
+﻿@model IEnumerable<RiyaBhandari_Lab2.Models.MembershipPlan>
+
+<section class="bg-white p-4 rounded shadow-sm">
+    <h2>Membership Plans</h2>
+
+    <div class="row g-3">
+        @foreach (var p in Model)
+        {
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@p.Name</h5>
+                        <p class="card-text">@p.Perks</p>
+                        <p class="card-text">
+                            <strong>$@p.Price</strong> / month
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
