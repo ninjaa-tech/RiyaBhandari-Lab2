@@ -29,7 +29,7 @@ name: "default",
 pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-// Seed in-memory data once at app start
+// Seed in-memory data once at app 
 InMemoryData.Seed();
 
 
